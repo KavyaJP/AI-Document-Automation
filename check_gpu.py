@@ -1,8 +1,3 @@
-import os
-
-# Backend must be set BEFORE importing keras
-os.environ["KERAS_BACKEND"] = "torch"
-
 import torch
 
 # Verify hardware visibility
