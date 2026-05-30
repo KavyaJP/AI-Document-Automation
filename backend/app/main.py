@@ -34,6 +34,7 @@ async def lifespan_function(app: FastAPI):
 
     if ollama_process:
         ollama_process.terminate()
+        print("\n\nStopped Ollama\n\n")
 
 
 app = FastAPI(title="Smart Document Workflow API", lifespan=lifespan_function)
