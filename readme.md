@@ -33,22 +33,24 @@ python -m venv venv
 pip3 install -r requirements.txt
 ```
 
-3.  Download tesseract OCR engine
+3.  Download Tesseract OCR engine
 
-- **Windows:** Go to [this page](https://github.com/UB-Mannheim/tesseract/wiki) and download the latest setup and install it and put the path of tesseract.exe in `.env`
+This project uses the open source tool [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) to extract text from images.
 
-- **macOS (via Homebrew):**
+**Option A: Automatic Detection (Recommended)**
+If Tesseract is installed and added to your system's PATH, the application will detect it automatically.
 
-  ```bash
-  brew install tesseract
-  ```
+**How to install it:**
 
-- **Linux (Ubuntu/Debian):**
+- **macOS:** `brew install tesseract`
+- **Linux:** `sudo apt update -y && sudo apt-get install tesseract-ocr`
+- **Windows:** Install via [this installer](https://github.com/UB-Mannheim/tesseract/wiki), then add the installation folder to your System PATH.
 
-  ```bash
-  sudo apt-get update
-  sudo apt-get install tesseract-ocr
-  ```
+**Option B: Manual Override**
+If you have a specific version you want to use, or if you don't want to modify your system PATH, create a `.env` file in the `backend/` folder and add the following:
+`tesseract_path="C:\Path\To\Your\tesseract.exe"`
+
+_Tip: Verify your installation by running `tesseract --version` in your terminal._
 
 ## LICENSE
 

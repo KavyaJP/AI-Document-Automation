@@ -1,4 +1,5 @@
 import os
+import shutil
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -9,3 +10,6 @@ env_path = backend_path / ".env"
 load_dotenv(dotenv_path=env_path)
 
 TESSERACT_PATH = os.getenv("tesseract_path")
+
+if not TESSERACT_PATH:
+    TESSERACT_PATH = shutil.which("tesseract")
