@@ -1,64 +1,112 @@
-# Automatic Smart Document
+# DocQuery
 
-## TechStack
+## Overview
 
-- Backend:
-  - Python FastAPI
-  - Uvicorn for runtime
-  - Tesseract for OCR
-  - LangChain & Ollama for LLM inference support
-  - `RecursiveCharacterTextSplitter` for chunking
-  - HuggingFace Embedding model `all-MiniLM-L6-v2` for Vectorisation
-  - ChromaDB for Vector Storage
+DocQuery is an AI-powered document intelligence platform that enables users to extract, analyze, and retrieve information from documents efficiently. The system combines Optical Character Recognition (OCR), vector embeddings, and Large Language Models (LLMs) to process both text-based and scanned documents, providing accurate and context-aware responses to user queries.
 
-- Frontend:
-  - Flutter
+## Technology Stack
 
-## Development Environment Setup Process
+### Backend
 
-1.  Create & activate virtual environment:
+- Python FastAPI
+- Uvicorn (Application Server)
+- Tesseract OCR
+- LangChain and Ollama for LLM inference
+- RecursiveCharacterTextSplitter for document chunking
+- Hugging Face Embedding Model: `all-MiniLM-L6-v2`
+- ChromaDB for vector storage
 
-```bash
-python -m venv venv
-```
+### Frontend
 
-- **Windows:**
+- Flutter
 
-  ```bash
-  .venv\Scripts\activate.bat
-  ```
+---
 
-- **Linux & MacOS:**
+## Development Environment Setup
 
-  ```bash
-  source .venv/bin/activate
-  ```
+### 1. Create and Activate a Virtual Environment
 
-2.  Download the libraries required for backend:
+Create a virtual environment:
 
 ```bash
-pip3 install -r requirements.txt
+python -m venv .venv
 ```
 
-3.  Download Tesseract OCR engine
+#### Windows
 
-This project uses the open source tool [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) to extract text from images.
+```bash
+.venv\Scripts\activate.bat
+```
 
-**Option A: Automatic Detection (Recommended)**
-If Tesseract is installed and added to your system's PATH, the application will detect it automatically.
+#### Linux and macOS
 
-**How to install it:**
+```bash
+source .venv/bin/activate
+```
 
-- **macOS:** `brew install tesseract`
-- **Linux:** `sudo apt update -y && sudo apt-get install tesseract-ocr`
-- **Windows:** Install via [this installer](https://github.com/UB-Mannheim/tesseract/wiki), then add the installation folder to your System PATH.
+### 2. Install Backend Dependencies
 
-**Option B: Manual Override**
-If you have a specific version you want to use, or if you don't want to modify your system PATH, create a `.env` file in the `backend/` folder and add the following:
-`tesseract_path="C:\Path\To\Your\tesseract.exe"`
+Install the required Python packages:
 
-_Tip: Verify your installation by running `tesseract --version` in your terminal._
+```bash
+pip install -r requirements.txt
+```
 
-## LICENSE
+### 3. Install Tesseract OCR
 
-This project is licensed under [MIT LICENSE](LICENSE)
+DocQuery uses Tesseract OCR to extract text from images and scanned documents.
+
+#### Option A: Automatic Detection (Recommended)
+
+If Tesseract is installed and available in your system PATH, the application will detect it automatically.
+
+**Installation Instructions**
+
+**macOS**
+
+```bash
+brew install tesseract
+```
+
+**Linux**
+
+```bash
+sudo apt update -y
+sudo apt install tesseract-ocr
+```
+
+**Windows**
+
+Install Tesseract using the official installer:
+
+https://github.com/UB-Mannheim/tesseract/wiki
+
+After installation, ensure that the Tesseract installation directory is added to your system PATH.
+
+#### Option B: Manual Configuration
+
+If you prefer to use a specific Tesseract installation, create a `.env` file inside the `backend/` directory and specify the executable path:
+
+```env
+tesseract_path="C:\Path\To\Your\tesseract.exe"
+```
+
+#### Verify Installation
+
+Confirm that Tesseract is installed correctly by running:
+
+```bash
+tesseract --version
+```
+
+---
+
+## API Documentation
+
+For API usage examples and integration details, refer to [Documentation](backend/api_examples.md)
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.

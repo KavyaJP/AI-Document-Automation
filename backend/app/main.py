@@ -43,7 +43,7 @@ async def lifespan_function(app: FastAPI):
         print("\n\nStopped Ollama\n\n")
 
 
-app = FastAPI(title="Smart Document Workflow API", lifespan=lifespan_function)
+app = FastAPI(title="DocQuery backend API", lifespan=lifespan_function)
 
 app.add_middleware(
     CORSMiddleware,
@@ -62,4 +62,4 @@ app.include_router(chat_routes.router, prefix="/api/v1/chat", tags=["Chat"])
 
 @app.get("/")
 def root():
-    return {"status": "ok", "message": "Smart Document Workflow API is working"}
+    return {"status": "ok", "message": "DocQuery backend API is working"}

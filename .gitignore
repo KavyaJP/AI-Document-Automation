@@ -9,3 +9,4 @@ __pycache__/
 *.png
 test_documents/
 chroma_db/
+models/
