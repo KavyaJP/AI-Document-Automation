@@ -2,11 +2,11 @@
 
 ## Overview
 
-DocQuery is an AI-powered document intelligence platform that enables users to extract, analyze, and retrieve information from documents efficiently. The system combines Optical Character Recognition (OCR), vector embeddings, and Large Language Models (LLMs) to process both text-based and scanned documents, providing accurate and context-aware responses to user queries.
+DocQuery is an AI-powered document platform to extract, analyze, and retrieve information from documents efficiently.
 
 ## Technology Stack
 
-### Backend
+### Backend 
 
 - Python FastAPI
 - Uvicorn (Application Server)
