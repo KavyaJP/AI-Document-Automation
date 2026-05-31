@@ -4,8 +4,15 @@
 
 - Backend:
   - Python FastAPI
+  - Uvicorn for runtime
   - Tesseract for OCR
-  - Ollama for LLM inference support
+  - LangChain & Ollama for LLM inference support
+  - `RecursiveCharacterTextSplitter` for chunking
+  - HuggingFace Embedding model `all-MiniLM-L6-v2` for Vectorisation
+  - ChromaDB for Vector Storage
+
+- Frontend:
+  - Flutter
 
 ## Development Environment Setup Process
 

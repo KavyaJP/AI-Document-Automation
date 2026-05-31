@@ -2,13 +2,13 @@ After Starting the application, you can visit [http://localhost:8000/docs#/](htt
 
 1. Pull Model from ollama:
 
-- Windows:
+- **Windows:**
 
   ```cmd
   curl -X POST "http://localhost:8000/api/v1/models/pull" -H "Content-Type: application/json" -d "{\"name\":\"qwen2.5:0.5b\"}"
   ```
 
-- Linux/MacOS:
+- **Linux & MacOS:**
 
   ```bash
   curl -X POST "http://localhost:8000/api/v1/models/pull" -H "Content-Type: application/json" -d '{"name":"qwen2.5:0.5b"}'
@@ -23,3 +23,19 @@ curl -X POST "http://localhost:8000/api/v1/documents/upload" -F "file=@E:\Progra
 ```
 
 **Returns:** `{"filename":"test_pdf.pdf","message":"Successfully added 1 chunk(s) into chroma database"}`
+
+3. Ask the question to Ollama downloaded LLM:
+
+- **Windows:**
+
+  ```bash
+  curl -X POST "http://localhost:8000/api/v1/chat/ask" -H "Content-Type: application/json" -d "{\"query\": \"Who wrote the smart document workflow testing PDF?\", \"model_name\":\"qwen2.5:0.5b\"}"
+  ```
+
+- **Linux & MacOS:**
+
+  ```bash
+  curl -X POST "http://localhost:8000/api/v1/chat/ask" -H "Content-Type: application/json" -d "{"query": "Who wrote the smart document workflow testing PDF?", "model_name":"qwen2.5:0.5b"}"
+  ```
+
+**Returns:** `{"question":"Who wrote the smart document workflow testing PDF?","answer":"The smart document workflow testing PDF was written by Kavya Prajapati.","context_used":"Smart Document Workflow Test PDF \nAbout \nThis is the pdf used for smart document workflow testing \nWritten by \nKavya Prajapati"}`

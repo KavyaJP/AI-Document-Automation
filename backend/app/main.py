@@ -10,6 +10,7 @@ from contextlib import asynccontextmanager
 # importing API routes
 from app.api.v1 import ollama_routes
 from app.api.v1 import document_routes
+from app.api.v1 import chat_routes
 
 from app.config import DB_PATH
 
@@ -35,8 +36,6 @@ async def lifespan_function(app: FastAPI):
 
         print("\n\nStarted Ollama\n\n")
 
-    print(DB_PATH)
-
     yield
 
     if ollama_process:
@@ -54,8 +53,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(ollama_routes.router, prefix="/api/v1/models")
-app.include_router(document_routes.router, prefix="/api/v1/documents")
+app.include_router(ollama_routes.router, prefix="/api/v1/models", tags=["Ollama"])
+app.include_router(
+    document_routes.router, prefix="/api/v1/documents", tags=["Document"]
+)
+app.include_router(chat_routes.router, prefix="/api/v1/chat", tags=["Chat"])
 
 
 @app.get("/")
