@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:doc_query/features/chat/presentation/chat_screen.dart';
+import 'package:doc_query/features/documents/presentation/document_upload_screen.dart';
 
 void main() {
   runApp(const DocQueryApp());
@@ -24,7 +24,7 @@ class DocQueryApp extends StatelessWidget {
         brightness: Brightness.dark,
       ),
       themeMode: ThemeMode.system,
-      home: const ChatScreen(),
+      home: const DocumentUploadScreen(),
     );
   }
 }

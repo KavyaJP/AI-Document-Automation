@@ -44,10 +44,10 @@ class _DocumentUploadScreenState extends State<DocumentUploadScreen> {
     }
   }
 
-  Future<void> _pickFile() async {
+  Future<void> _pickFile(List<String> extensions) async {
     final result = await FilePicker.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['pdf', 'png', 'jpg', 'jpeg'],
+      allowedExtensions: extensions,
     );
 
     if (result != null && result.files.single.path != null) {
@@ -106,33 +106,105 @@ class _DocumentUploadScreenState extends State<DocumentUploadScreen> {
               ),
               borderRadius: BorderRadius.circular(12),
             ),
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (_isUploading)
+                    const CircularProgressIndicator()
+                  else ...[
+                    Icon(
+                      Icons.cloud_upload_outlined,
+                      size: 64,
+                      color: _isDragging
+                          ? Theme.of(context).colorScheme.primary
+                          : Colors.grey,
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Drag & drop any file here',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'Supports PDF, Images (PNG, JPG, JPEG), and Text files (TXT, MD)',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    const SizedBox(height: 32),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _buildCategoryCard(
+                          title: 'PDF Document',
+                          icon: Icons.picture_as_pdf,
+                          color: Colors.redAccent,
+                          extensions: ['pdf'],
+                        ),
+                        const SizedBox(width: 16),
+                        _buildCategoryCard(
+                          title: 'Image File',
+                          icon: Icons.image,
+                          color: Colors.blueAccent,
+                          extensions: ['png', 'jpg', 'jpeg'],
+                        ),
+                        const SizedBox(width: 16),
+                        _buildCategoryCard(
+                          title: 'Text File',
+                          icon: Icons.description,
+                          color: Colors.green,
+                          extensions: ['txt', 'md'],
+                        ),
+                      ],
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCategoryCard({
+    required String title,
+    required IconData icon,
+    required Color color,
+    required List<String> extensions,
+  }) {
+    return SizedBox(
+      width: 180,
+      height: 140,
+      child: Card(
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: Theme.of(context).dividerColor),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(8),
+          onTap: () => _pickFile(extensions),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (_isUploading)
-                  const CircularProgressIndicator()
-                else ...[
-                  Icon(
-                    Icons.cloud_upload_outlined,
-                    size: 64,
-                    color: _isDragging
-                        ? Theme.of(context).colorScheme.primary
-                        : Colors.grey,
+                Icon(icon, color: color, size: 36),
+                const SizedBox(height: 12),
+                Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
                   ),
-                  const SizedBox(height: 16),
-                  Text(
-                    'Drag and drop your PDF or Image here',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  const SizedBox(height: 8),
-                  const Text('or', style: TextStyle(color: Colors.grey)),
-                  const SizedBox(height: 8),
-                  ElevatedButton.icon(
-                    onPressed: _pickFile,
-                    icon: const Icon(Icons.folder_open),
-                    label: const Text('Browse Files'),
-                  ),
-                ],
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  extensions.map((e) => '.$e').join(', '),
+                  style: const TextStyle(color: Colors.grey, fontSize: 11),
+                ),
               ],
             ),
           ),
